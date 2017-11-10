@@ -1,0 +1,11 @@
+=== Automater.pl ===
+Contributors: mkutyba
+Tags: integration, automation
+Requires at least: 4.8
+Tested up to: 4.8
+Requires PHP: 7.0
+Stable tag: 0.1.0
+License: GPLv3
+URI: http://www.gnu.org/licenses/gpl-3.0.html
+
+WooCommerce integration with Automater.pl
