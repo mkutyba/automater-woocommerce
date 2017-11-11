@@ -9,3 +9,8 @@ License: GPLv3
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WooCommerce integration with Automater.pl
+
+== Changelog ==
+
+= 0.1.0 - 2017-11-11 =
+* Initial release
