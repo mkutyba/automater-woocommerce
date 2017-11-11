@@ -42,6 +42,7 @@ class Integration extends WC_Integration {
 		$this->display_status_message();
 		$this->init_order_hooks();
 		$this->init_cron_job();
+		$this->maybe_create_product_attribute();
 	}
 
 	protected function init_integration() {
@@ -139,9 +140,31 @@ class Integration extends WC_Integration {
 		$synchronizer->init_cron_job();
 	}
 
-	public function unschedule_cron_job() {
-		$synchronizer = new Synchronizer( $this );
-		$synchronizer->unschedule_cron_job();
+	protected function maybe_create_product_attribute() {
+		wc_get_logger()->notice( 'Automater.pl: maybe_create_product_attribute' );
+		global $wpdb;
+
+		$attribute_name = 'automater_product';
+
+		$exists = $wpdb->get_var(
+			$wpdb->prepare( "
+                    SELECT attribute_id
+                    FROM " . $wpdb->prefix . "woocommerce_attribute_taxonomies
+                    WHERE attribute_name = %s",
+				$attribute_name )
+		);
+
+		if ( ! $exists ) {
+			wc_get_logger()->notice( "Automater.pl: Create product attribute '$attribute_name'" );
+			$wpdb->insert( $wpdb->prefix . "woocommerce_attribute_taxonomies", [
+				'attribute_name'    => $attribute_name,
+				'attribute_label'   => __( 'Automater Product' ),
+				'attribute_type'    => 'select',
+				'attribute_orderby' => 'menu_order',
+				'attribute_public'  => 0,
+			] );
+			delete_transient( 'wc_attribute_taxonomies' );
+		}
 	}
 
 	public function api_enabled() {

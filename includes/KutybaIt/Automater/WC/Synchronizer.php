@@ -15,33 +15,6 @@ class Synchronizer {
 		$this->proxy       = new Proxy( $integration->get_api_key(), $integration->get_api_secret() );
 	}
 
-	public static function maybe_create_product_attribute() {
-		wc_get_logger()->notice( 'Automater.pl: maybe_create_product_attribute' );
-		global $wpdb;
-
-		$attribute_name = 'automater_product';
-
-		$exists = $wpdb->get_var(
-			$wpdb->prepare( "
-                    SELECT attribute_id
-                    FROM " . $wpdb->prefix . "woocommerce_attribute_taxonomies
-                    WHERE attribute_name = %s",
-				$attribute_name )
-		);
-
-		if ( ! $exists ) {
-			wc_get_logger()->notice( "Automater.pl: Create product attribute '$attribute_name'" );
-			$wpdb->insert( $wpdb->prefix . "woocommerce_attribute_taxonomies", [
-				'attribute_name'    => $attribute_name,
-				'attribute_label'   => __( 'Automater Product' ),
-				'attribute_type'    => 'select',
-				'attribute_orderby' => 'menu_order',
-				'attribute_public'  => 0,
-			] );
-			delete_transient( 'wc_attribute_taxonomies' );
-		}
-	}
-
 	public function import_automater_products_to_wp_terms() {
 		if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'import_automater_products_nonce' ) ) {
 			exit( __( 'Cheatin&#8217; uh?' ) );
@@ -138,7 +111,6 @@ class Synchronizer {
 			$this->update_stocks_job();
 		} );
 		$this->schedule_cron_job();
-//		add_action( 'init', [ $this, 'schedule_cron_job' ] );
 	}
 
 	public function add_cron_recurrence_interval( $schedules ) {
@@ -150,20 +122,17 @@ class Synchronizer {
 		return $schedules;
 	}
 
-	public function unschedule_cron_job() {
+	public static function unschedule_cron_job() {
 		$timestamp = wp_next_scheduled( 'update_stocks_job_action' );
 
 		if ( $timestamp ) {
-			if ( $this->integration->get_debug_log() ) {
-				wc_get_logger()->notice( 'Automater.pl: Removing cron job' );
-			}
 			wp_unschedule_event( $timestamp, 'update_stocks_job_action' );
 		}
 	}
 
 	protected function schedule_cron_job() {
 		if ( ! $this->integration->get_enable_cron_job() ) {
-			$this->unschedule_cron_job();
+			self::unschedule_cron_job();
 
 			return;
 		}
