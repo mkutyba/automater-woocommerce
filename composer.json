@@ -1,0 +1,15 @@
+{
+    "name": "kutybait/automater-woocommerce",
+    "description": "WooCommerce integration with Automater.pl",
+    "type": "wordpress-plugin",
+    "require": {
+        "php-di/php-di": "^5.4"
+    },
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Mateusz Kutyba",
+            "email": "mateusz@kutyba.it"
+        }
+    ]
+}
