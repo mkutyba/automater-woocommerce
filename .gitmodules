@@ -1,0 +1,3 @@
+[submodule "lib/Automater-PHP-SDK"]
+	path = lib/Automater-PHP-SDK
+	url = https://github.com/automater-pl/Automater-PHP-SDK.git

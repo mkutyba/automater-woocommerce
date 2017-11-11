@@ -29,7 +29,7 @@ if ( ! defined( 'AUTOMATER_PLUGIN_FILE' ) ) {
 }
 
 require_once 'includes/autoload.php';
-require_once 'vendor/Automater-PHP-SDK/autoload.php';
+require_once 'lib/Automater-PHP-SDK/autoload.php';
 
 use \KutybaIt\Automater\Automater;
 
