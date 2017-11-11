@@ -6,70 +6,41 @@ namespace KutybaIt\Automater;
 use KutybaIt\Automater\WC\Integration;
 
 class Automater {
-	protected static $_instance;
-	public $wc_integration;
+	/** @var Automater */
+	protected static $instance;
 
-	public static function instance(): Automater {
-		if ( self::$_instance === null ) {
-			self::$_instance = new self();
+	public static function get_instance(): Automater {
+		if ( self::$instance === null ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
 	 * Construct the plugin.
 	 */
 	public function __construct() {
-		$this->init_hooks();
-		add_action( 'plugins_loaded', [ $this, 'init' ] );
+		$this->set_locale();
+		$this->init_wc_actions();
 	}
 
-	protected function init_hooks() {
-		register_activation_hook( __FILE__, [ $this, 'plugin_activation' ] );
-		register_deactivation_hook( __FILE__, [ $this, 'plugin_deactivation' ] );
+	private function set_locale() {
+		add_action( 'plugins_loaded', [ di( I18n::class ), 'load_plugin_textdomain' ] );
 	}
 
-	public function init() {
-		$this->init_wc_integration();
-		$this->load_plugin_textdomain();
-	}
+	private function init_wc_actions() {
+		add_action( 'plugins_loaded', [ Integration\Register::class, 'register_wc_integration' ] );
 
-	/**
-	 * Initialize the plugin.
-	 */
-	protected function init_wc_integration() {
-		// Checks if WooCommerce is installed.
-		if ( class_exists( 'WC_Integration' ) ) {
-			// Register the integration.
-			add_filter( 'woocommerce_integrations', [ $this, 'add_integration' ] );
-		} else {
-			add_action( 'admin_notices', function () {
-				Notice::render_error( __( 'Unable to register Automater.pl integration.', 'automater-pl' ) );
-			} );
+		if ( $this->wc_active() ) {
+			add_filter( 'woocommerce_integrations', [ $this, 'init_wc' ] );
 		}
 	}
 
-	public function load_plugin_textdomain() {
-		load_plugin_textdomain( 'automater-pl', false, dirname( plugin_basename( AUTOMATER_PLUGIN_FILE ) ) . '/languages' );
+	public function init_wc() {
 	}
 
-	/**
-	 * Add a new integration to WooCommerce.
-	 */
-	public function add_integration( $integrations ): array {
-		$integrations[] = '\KutybaIt\Automater\WC\Integration';
-
-		return $integrations;
-	}
-
-	public function plugin_activation() {
-		$integration = new Integration;
-		$integration->maybe_create_product_attribute();
-	}
-
-	public function plugin_deactivation() {
-		$integration = new Integration;
-		$integration->unschedule_cron_job();
+	private function wc_active() {
+		return in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) );
 	}
 }

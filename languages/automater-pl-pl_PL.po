@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Automater.pl 0.1.0\n"
-"POT-Creation-Date: 2017-11-10 17:33+0100\n"
-"PO-Revision-Date: 2017-11-10 17:38+0100\n"
+"POT-Creation-Date: 2017-11-11 19:21+0100\n"
+"PO-Revision-Date: 2017-11-11 19:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -11,161 +11,180 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 
-#. Description of the plugin/theme
+#: automater-pl.php:29
 msgid "WooCommerce integration with Automater.pl"
 msgstr "Integracja WooCommerce z Automater.pl"
 
-#: includes/KutybaIt/Automater/Automater.php:48
-msgid "Unable to register Automater.pl integration."
-msgstr "Nie można zarejestrować integracji Automater.pl."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:27
+#: includes/KutybaIt/Automater/WC/Integration.php:49
 msgid "Automater.pl"
 msgstr "Automater.pl"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:28
+#: includes/KutybaIt/Automater/WC/Integration.php:50
 #, php-format
 msgid "An integration with Automater.pl by %s"
 msgstr "Integracja z Automater.pl od %s"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:31
+#: includes/KutybaIt/Automater/WC/Integration.php:53
 msgid "Import products from your Automater.pl account"
 msgstr "Importuj produkty ze swojego konta Automater.pl"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:32
+#: includes/KutybaIt/Automater/WC/Integration.php:54
 msgid "Update products stocks"
 msgstr "Zaktualizuj stany produktów"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:57
-msgid "Products import success."
-msgstr "Import produktów zakończony sukcesem."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:59
-msgid "Products import failed. Check logs."
-msgstr "Import produktów nie powiódł się. Sprawdź logi."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:61
-msgid "Nothing new to import."
-msgstr "Nic nowego do zaimportowania."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:65
-msgid "Stocks update success."
-msgstr "Sukces aktualizacji stanów magazynowych."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:67
-msgid "Nothing to update."
-msgstr "Nic do aktualizacji."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:98
-msgid "Automater Product"
-msgstr "Produkt Automater"
-
-#: includes/KutybaIt/Automater/WC/Integration.php:110
-msgid "Every 5 Minutes"
-msgstr "Co 5 minut"
-
-#: includes/KutybaIt/Automater/WC/Integration.php:145
-#: includes/KutybaIt/Automater/WC/Integration.php:157
-#: includes/KutybaIt/Automater/WC/Integration.php:232
-msgid "Cheatin&#8217; uh?"
-msgstr "Oszukujesz?"
-
-#: includes/KutybaIt/Automater/WC/Integration.php:149
-#: includes/KutybaIt/Automater/WC/Integration.php:236
-msgid "Please provide API configuration first."
-msgstr "Najpierw podaj konfigurację interfejsu API."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:158
-msgid "Sorry, you are not allowed to create terms in this taxonomy."
-msgstr "Niestety, nie możesz tworzyć wpisów w tej taksonomii."
-
-#: includes/KutybaIt/Automater/WC/Integration.php:311
+#: includes/KutybaIt/Automater/WC/Integration.php:60
 msgid "API Key"
 msgstr "API Key"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:313
-#: includes/KutybaIt/Automater/WC/Integration.php:320
+#: includes/KutybaIt/Automater/WC/Integration.php:62
+#: includes/KutybaIt/Automater/WC/Integration.php:69
 msgid "Login to Automater.pl and get keys from Settings / settings / API"
-msgstr "Zaloguj się do Automater.pl i uzyskaj klucze w Ustawienia / ustawienia / API"
+msgstr ""
+"Zaloguj się do Automater.pl i uzyskaj klucze w Ustawienia / ustawienia / API"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:318
+#: includes/KutybaIt/Automater/WC/Integration.php:67
 msgid "API Secret"
 msgstr "API Secret"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:325
+#: includes/KutybaIt/Automater/WC/Integration.php:74
 msgid "Debug Log"
 msgstr "Dziennik debugowania"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:327
+#: includes/KutybaIt/Automater/WC/Integration.php:76
 msgid "Enable the logging of API calls and errors"
 msgstr "Włącz rejestrowanie wywołań API i błędów"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:332
+#: includes/KutybaIt/Automater/WC/Integration.php:81
 msgid "Synchronize stocks every 5 minutes"
 msgstr "Synchronizuj stany magazynowe co 5 minut"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:334
+#: includes/KutybaIt/Automater/WC/Integration.php:83
 msgid "Enable cron job to synchronize products stocks"
 msgstr "Włącz zadanie cron do synchronizacji stanów magazynowych produktów"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:360
-msgid "Looks like you made a mistake with the API Key field. Make sure it is 32 characters copied from Automater.pl settings"
-msgstr "Wygląda na to, że popełniłeś błąd w polu API Key. Upewnij się, że skopiowano 32 znaki z ustawień Automater.pl"
+#: includes/KutybaIt/Automater/WC/Integration.php:116
+msgid "Products import success."
+msgstr "Import produktów zakończony sukcesem."
 
-#: includes/KutybaIt/Automater/WC/Integration.php:369
-msgid "Looks like you made a mistake with the API Secret field. Make sure it is 32 characters copied from Automater.pl settings"
-msgstr "Wygląda na to, że popełniłeś błąd w polu API Secret. Upewnij się, że skopiowano 32 znaki z ustawień Automater.pl"
+#: includes/KutybaIt/Automater/WC/Integration.php:118
+msgid "Products import failed. Check logs."
+msgstr "Import produktów nie powiódł się. Sprawdź logi."
 
-#: includes/KutybaIt/Automater/WC/Integration.php:397
-msgid "Automater.pl integration is almost ready. To get started, connect your account by providing API Keys."
-msgstr "Integracja Automater.pl jest już prawie gotowa. Aby rozpocząć, połącz swoje konto, podając klucze API."
+#: includes/KutybaIt/Automater/WC/Integration.php:120
+msgid "Nothing new to import."
+msgstr "Nic nowego do zaimportowania."
 
-#: includes/KutybaIt/Automater/WC/Integration.php:397
+#: includes/KutybaIt/Automater/WC/Integration.php:124
+msgid "Stocks update success."
+msgstr "Sukces aktualizacji stanów magazynowych."
+
+#: includes/KutybaIt/Automater/WC/Integration.php:126
+msgid "Nothing to update."
+msgstr "Nic do aktualizacji."
+
+#: includes/KutybaIt/Automater/WC/Integration.php:170
+msgid ""
+"Looks like you made a mistake with the API Key field. Make sure it is 32 "
+"characters copied from Automater.pl settings"
+msgstr ""
+"Wygląda na to, że popełniłeś błąd w polu API Key. Upewnij się, że skopiowano "
+"32 znaki z ustawień Automater.pl"
+
+#: includes/KutybaIt/Automater/WC/Integration.php:179
+msgid ""
+"Looks like you made a mistake with the API Secret field. Make sure it is 32 "
+"characters copied from Automater.pl settings"
+msgstr ""
+"Wygląda na to, że popełniłeś błąd w polu API Secret. Upewnij się, że "
+"skopiowano 32 znaki z ustawień Automater.pl"
+
+#: includes/KutybaIt/Automater/WC/Integration.php:207
+msgid ""
+"Automater.pl integration is almost ready. To get started, connect your "
+"account by providing API Keys."
+msgstr ""
+"Integracja Automater.pl jest już prawie gotowa. Aby rozpocząć, połącz swoje "
+"konto, podając klucze API."
+
+#: includes/KutybaIt/Automater/WC/Integration.php:207
 msgid "Go to settings"
 msgstr "Przejdź do ustawień"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:448
+#: includes/KutybaIt/Automater/WC/Integration/Register.php:20
+msgid "Unable to register Automater.pl integration. Is WooCommerce installed?"
+msgstr ""
+"Nie można zarejestrować integracji Automater.pl. Czy WooCommerce jest "
+"zainstalowany?"
+
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:49
 msgid "Automater.pl codes:"
 msgstr "Kody Automater.pl:"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:466
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:67
 #, php-format
 msgid "Product not managed by automater: %s [%s]"
 msgstr "Produkt nie jest zarządzany przez automater: %s [%s]"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:471
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:72
 #, php-format
 msgid "Invalid quantity of product: %s [%s]"
 msgstr "Nieprawidłowa ilość produktu: %s [%s]"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:490
-#: includes/KutybaIt/Automater/WC/Integration.php:496
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:91
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:97
 #, php-format
 msgid "No codes for ID: %s"
 msgstr "Brak kodów dla ID: %s"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:501
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:102
 #, php-format
 msgid "Not enough codes for ID, sent less: %s"
 msgstr "Niewystarczająca liczba kodów dla ID, wysłano mniej: %s"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:518
-#: includes/KutybaIt/Automater/WC/Integration.php:523
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:119
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:124
 #, php-format
 msgid "Order from %s, id: #%s"
 msgstr "Zamówienie z %s, id: #%s"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:532
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:133
 #, php-format
 msgid "Created cart number: %s"
 msgstr "Utworzono koszyk numer: %s"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:595
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:167
 #, php-format
 msgid "Automater.pl - paid successfully: %s"
 msgstr "Automater.pl - zapłacono pomyślnie: %s"
+
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:36
+msgid "Automater Product"
+msgstr "Produkt Automater"
+
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:47
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:59
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:180
+msgid "Cheatin&#8217; uh?"
+msgstr "Oszukujesz?"
+
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:51
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:184
+msgid "Please provide API configuration first."
+msgstr "Najpierw podaj konfigurację interfejsu API."
+
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:60
+msgid "Sorry, you are not allowed to create terms in this taxonomy."
+msgstr "Niestety, nie możesz tworzyć wpisów w tej taksonomii."
+
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:147
+msgid "Every 5 Minutes"
+msgstr "Co 5 minut"
+
+#~ msgid "Unable to register Automater.pl integration."
+#~ msgstr "Nie można zarejestrować integracji Automater.pl."

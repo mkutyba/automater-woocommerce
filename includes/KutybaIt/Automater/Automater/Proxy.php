@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace KutybaIt\Automater\Automater;
 
-use \Automater\Automater;
+use Automater\Automater;
 
 class Proxy {
 	protected $api_key;
@@ -36,13 +36,13 @@ class Proxy {
 	public function get_all_products() {
 		$data   = [];
 		$result = $this->get_instance()->getProducts();
-		if ( $result['code'] == '200' ) {
+		if ( $result['code'] === 200 ) {
 			$data  = $result['data'];
 			$count = $result['count'];
 			if ( $count > 50 ) {
 				for ( $i = 1; $i * 50 < $count; $i ++ ) {
 					$result = $this->get_instance()->getProducts( $i + 1 );
-					if ( $result['code'] == '200' ) {
+					if ( $result['code'] === 200 ) {
 						$data = array_merge( $data, $result['data'] );
 					}
 				}

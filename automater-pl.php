@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 /**
  * Plugin Name: Automater.pl
  * Plugin URI: https://automater.pl
@@ -20,21 +21,42 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
+
+__( 'WooCommerce integration with Automater.pl', 'automater-pl' ); // plugin description for poedit
 
 if ( ! defined( 'AUTOMATER_PLUGIN_FILE' ) ) {
 	define( 'AUTOMATER_PLUGIN_FILE', __FILE__ );
 }
 
 require_once 'includes/autoload.php';
+require_once 'includes/DI.php';
 require_once 'lib/Automater-PHP-SDK/autoload.php';
+require_once 'vendor/autoload.php';
 
 use \KutybaIt\Automater\Automater;
+use \KutybaIt\Automater\Activator;
+
+function activate_automater_pl() {
+	Activator::activate();
+}
+
+function deactivate_automater_pl() {
+	Activator::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_automater_pl' );
+register_deactivation_hook( __FILE__, 'deactivate_automater_pl' );
+
+function di( $name ) {
+	return DI::getInstance()->getContainer()->get( $name );
+}
 
 function automater() {
-	return Automater::instance();
+	return Automater::get_instance();
 }
 
 automater();
