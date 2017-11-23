@@ -1,7 +1,5 @@
 <?php
-declare( strict_types=1 );
 
-use DI\Container;
 use DI\ContainerBuilder;
 
 final class DI {
@@ -15,7 +13,7 @@ final class DI {
 		$this->buildContainer();
 	}
 
-	public static function getInstance(): DI {
+	public static function getInstance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -23,11 +21,11 @@ final class DI {
 		return self::$instance;
 	}
 
-	public function getContainer(): Container {
+	public function getContainer() {
 		return $this->container;
 	}
 
-	private function buildContainer(): Container {
+	private function buildContainer() {
 		$builder = new ContainerBuilder();
 		$builder->addDefinitions( [
 		] );

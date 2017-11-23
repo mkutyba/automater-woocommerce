@@ -1,5 +1,4 @@
 <?php
-declare( strict_types=1 );
 
 namespace KutybaIt\Automater;
 
@@ -9,7 +8,7 @@ class Automater {
 	/** @var Automater */
 	protected static $instance;
 
-	public static function get_instance(): Automater {
+	public static function get_instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}

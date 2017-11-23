@@ -1,5 +1,4 @@
 <?php
-declare( strict_types=1 );
 
 namespace KutybaIt\Automater\WC;
 
@@ -180,7 +179,7 @@ class Synchronizer {
 		exit();
 	}
 
-	public function update_stocks_job(): int {
+	public function update_stocks_job() {
 		if ( ! $this->integration->api_enabled() ) {
 			exit();
 		}

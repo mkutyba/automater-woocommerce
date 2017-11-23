@@ -1,5 +1,4 @@
 <?php
-declare( strict_types=1 );
 
 namespace KutybaIt\Automater\Automater;
 
@@ -14,7 +13,7 @@ class Proxy {
 		$this->api_secret = $api_secret;
 	}
 
-	protected function get_instance(): Automater {
+	protected function get_instance() {
 		return new Automater( $this->api_key, $this->api_secret );
 	}
 

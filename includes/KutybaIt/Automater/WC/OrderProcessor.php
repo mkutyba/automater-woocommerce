@@ -1,5 +1,4 @@
 <?php
-declare( strict_types=1 );
 
 namespace KutybaIt\Automater\WC;
 
@@ -17,7 +16,7 @@ class OrderProcessor {
 		$this->proxy       = new Proxy( $integration->get_api_key(), $integration->get_api_secret() );
 	}
 
-	public function order_placed( int $order_id ) {
+	public function order_placed( $order_id ) {
 		if ( ! $this->integration->api_enabled() ) {
 			return;
 		}
@@ -29,7 +28,7 @@ class OrderProcessor {
 		$this->create_transaction( $order_id );
 	}
 
-	public function order_completed( int $order_id ) {
+	public function order_completed( $order_id ) {
 		if ( ! $this->integration->api_enabled() ) {
 			return;
 		}
@@ -41,7 +40,7 @@ class OrderProcessor {
 		$this->pay_transaction( $order_id );
 	}
 
-	protected function create_transaction( int $order_id ) {
+	protected function create_transaction( $order_id ) {
 		$order = wc_get_order( $order_id );
 
 		$items    = $order->get_items();
@@ -57,7 +56,7 @@ class OrderProcessor {
 		}
 	}
 
-	protected function validate_items( array $items, array &$result ): array {
+	protected function validate_items( array $items, array &$result ) {
 		$products = [];
 		/** @var WC_Order_Item_Product $item */
 		foreach ( $items as $item ) {
@@ -149,7 +148,7 @@ class OrderProcessor {
 		$order->add_order_note( implode( '<br>', $status ) );
 	}
 
-	protected function pay_transaction( int $order_id ) {
+	protected function pay_transaction( $order_id ) {
 		$order             = wc_get_order( $order_id );
 		$automater_cart_id = $order->get_meta( 'automater_cart_id' );
 
