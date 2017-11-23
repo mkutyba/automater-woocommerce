@@ -139,7 +139,7 @@ class Integration extends WC_Integration {
 		$synchronizer->init_cron_job();
 	}
 
-	protected function maybe_create_product_attribute() {
+	public function maybe_create_product_attribute() {
 		wc_get_logger()->notice( 'Automater.pl: maybe_create_product_attribute' );
 		global $wpdb;
 

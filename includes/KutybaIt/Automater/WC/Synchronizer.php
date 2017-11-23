@@ -23,6 +23,8 @@ class Synchronizer {
 			exit( __( 'Please provide API configuration first.' ) );
 		}
 
+		$this->integration->maybe_create_product_attribute();
+
 		$taxonomy = 'pa_automater_product';
 
 		$tax = get_taxonomy( $taxonomy );
