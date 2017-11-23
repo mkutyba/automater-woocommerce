@@ -157,7 +157,7 @@ class Integration extends WC_Integration {
 			wc_get_logger()->notice( "Automater.pl: Create product attribute '$attribute_name'" );
 			$wpdb->insert( $wpdb->prefix . "woocommerce_attribute_taxonomies", [
 				'attribute_name'    => $attribute_name,
-				'attribute_label'   => __( 'Automater Product' ),
+				'attribute_label'   => __( 'Automater Product', 'automater-pl' ),
 				'attribute_type'    => 'select',
 				'attribute_orderby' => 'menu_order',
 				'attribute_public'  => 0,
