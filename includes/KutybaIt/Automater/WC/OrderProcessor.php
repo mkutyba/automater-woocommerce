@@ -28,7 +28,7 @@ class OrderProcessor {
 		$this->create_transaction( $order_id );
 	}
 
-	public function order_completed( $order_id ) {
+	public function order_processing( $order_id ) {
 		if ( ! $this->integration->api_enabled() ) {
 			return;
 		}

@@ -130,8 +130,8 @@ class Integration extends WC_Integration {
 	protected function init_order_hooks() {
 		// Hook order placed
 		add_action( 'woocommerce_thankyou', [ new OrderProcessor( $this ), 'order_placed' ] );
-		// Hook order completed (paid)
-		add_action( 'woocommerce_order_status_completed', [ new OrderProcessor( $this ), 'order_completed' ] );
+		// Hook order processing (paid)
+		add_action( 'woocommerce_order_status_processing', [ new OrderProcessor( $this ), 'order_processing' ] );
 	}
 
 	protected function init_cron_job() {
