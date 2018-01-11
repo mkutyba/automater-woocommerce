@@ -3,7 +3,7 @@
  * Plugin Name: Automater.pl
  * Plugin URI: https://automater.pl
  * Description: WooCommerce integration with Automater.pl
- * Version: 0.1.1
+ * Version: 0.1.2
  * Author: kutyba.it
  * Author URI: https://kutyba.it
  * Requires at least: 4.8
