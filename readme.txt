@@ -2,15 +2,18 @@
 Contributors: mkutyba
 Tags: integration, automation
 Requires at least: 4.8
-Tested up to: 4.8
-Requires PHP: 7.0
-Stable tag: 0.1.2
+Tested up to: 4.9
+Requires PHP: 5.6
+Stable tag: 0.1.3
 License: GPLv3
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WooCommerce integration with Automater.pl
 
 == Changelog ==
+
+= 0.1.3 - 2018-01-13 =
+* Update Automater PHP SDK to current version
 
 = 0.1.2 - 2018-01-11 =
 * Change hook from order completed to order processing - payment modules change order status to processing

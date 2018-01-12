@@ -140,7 +140,6 @@ class Integration extends WC_Integration {
 	}
 
 	public function maybe_create_product_attribute() {
-		wc_get_logger()->notice( 'Automater.pl: maybe_create_product_attribute' );
 		global $wpdb;
 
 		$attribute_name = 'automater_product';

@@ -3,11 +3,11 @@
  * Plugin Name: Automater.pl
  * Plugin URI: https://automater.pl
  * Description: WooCommerce integration with Automater.pl
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: kutyba.it
  * Author URI: https://kutyba.it
  * Requires at least: 4.8
- * Tested up to: 4.8
+ * Tested up to: 4.9
  *
  * Text Domain: automater-pl
  * Domain Path: /languages
@@ -33,7 +33,6 @@ if ( ! defined( 'AUTOMATER_PLUGIN_FILE' ) ) {
 
 require_once 'includes/autoload.php';
 require_once 'includes/DI.php';
-require_once 'lib/Automater-PHP-SDK/autoload.php';
 require_once 'vendor/autoload.php';
 
 use \KutybaIt\Automater\Automater;

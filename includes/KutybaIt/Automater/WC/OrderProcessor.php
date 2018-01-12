@@ -2,6 +2,12 @@
 
 namespace KutybaIt\Automater\WC;
 
+use AutomaterSDK\Exception\ApiException;
+use AutomaterSDK\Exception\NotFoundException;
+use AutomaterSDK\Exception\TooManyRequestsException;
+use AutomaterSDK\Exception\UnauthorizedException;
+use AutomaterSDK\Response\PaymentResponse;
+use AutomaterSDK\Response\TransactionResponse;
 use Exception;
 use KutybaIt\Automater\Automater\Proxy;
 use WC_Order;
@@ -67,14 +73,16 @@ class OrderProcessor {
 					continue;
 				}
 				$qty = (int) $item->get_quantity();
-				if ( is_nan( $qty ) || $qty <= 0 ) {
+				if ( $qty <= 0 || is_nan( $qty ) ) {
 					$result[] = sprintf( __( 'Invalid quantity of product: %s [%s]', 'automater-pl' ), $item->get_name(), $item->get_id() );
 					continue;
 				}
 				if ( ! isset( $products[ $automater_product_id ] ) ) {
-					$products[ $automater_product_id ] = 0;
+					$products[ $automater_product_id ]['qty']      = 0;
+					$products[ $automater_product_id ]['price']    = $item->get_product()->get_price();
+					$products[ $automater_product_id ]['currency'] = get_woocommerce_currency();
 				}
-				$products[ $automater_product_id ] += $qty;
+				$products[ $automater_product_id ]['qty'] += $qty;
 			} catch ( Exception $e ) {
 				$result[] = $e->getMessage() . sprintf( ': %s [%s]', $item->get_name(), $item->get_id() );
 			}
@@ -84,13 +92,14 @@ class OrderProcessor {
 	}
 
 	protected function validate_products_stock( array &$products, array &$result ) {
-		foreach ( $products as $automater_product_id => $qty ) {
+		foreach ( $products as $automater_product_id => $product ) {
 			try {
-				if ( ! $qty ) {
+				if ( ! $product['qty'] ) {
 					$result[] = sprintf( __( 'No codes for ID: %s', 'automater-pl' ), $automater_product_id );
 					unset( $products[ $automater_product_id ] );
 					continue;
 				}
+				$qty         = $product['qty'];
 				$codes_count = $this->proxy->get_count_for_product( $automater_product_id );
 				if ( ! $codes_count ) {
 					$result[] = sprintf( __( 'No codes for ID: %s', 'automater-pl' ), $automater_product_id );
@@ -98,8 +107,8 @@ class OrderProcessor {
 					continue;
 				}
 				if ( $codes_count < $qty ) {
-					$result[]                          = sprintf( __( 'Not enough codes for ID, sent less: %s', 'automater-pl' ), $automater_product_id );
-					$products[ $automater_product_id ] = $codes_count;
+					$result[]                                 = sprintf( __( 'Not enough codes for ID, sent less: %s', 'automater-pl' ), $automater_product_id );
+					$products[ $automater_product_id ]['qty'] = $codes_count;
 				}
 			} catch ( Exception $e ) {
 				$result[] = $e->getMessage() . sprintf( ': %s', $automater_product_id );
@@ -110,33 +119,36 @@ class OrderProcessor {
 
 	protected function create_automater_transaction( array $products, WC_Order $order, array &$result ) {
 		if ( count( $products ) ) {
+			if ( $this->integration->get_debug_log() ) {
+				wc_get_logger()->notice( 'Automater.pl: Creating automater transaction' );
+				wc_get_logger()->notice( 'Automater.pl: ' . $order->get_billing_email() );
+				wc_get_logger()->notice( 'Automater.pl: ' . $order->get_billing_phone() );
+				wc_get_logger()->notice( 'Automater.pl: ' . sprintf( __( 'Order from %s, id: #%s', 'automater-pl' ), get_bloginfo( 'name' ), $order->get_order_number() ) );
+			}
+
+			$email = $order->get_billing_email();
+			$phone = $order->get_billing_phone();
+			$label = sprintf( __( 'Order from %s, id: #%s', 'automater-pl' ), get_bloginfo( 'name' ), $order->get_order_number() );
+
 			try {
-				if ( $this->integration->get_debug_log() ) {
-					wc_get_logger()->notice( 'Automater.pl: Creating automater transaction' );
-					wc_get_logger()->notice( 'Automater.pl: ' . $order->get_billing_email() );
-					wc_get_logger()->notice( 'Automater.pl: ' . $order->get_billing_phone() );
-					wc_get_logger()->notice( 'Automater.pl: ' . sprintf( __( 'Order from %s, id: #%s', 'automater-pl' ), get_bloginfo( 'name' ), $order->get_order_number() ) );
-				}
-				$response = $this->proxy->create_transaction(
-					$products, $order->get_billing_email(),
-					$order->get_billing_phone(),
-					sprintf( __( 'Order from %s, id: #%s', 'automater-pl' ), get_bloginfo( 'name' ), $order->get_order_number() )
-				);
+				/** @var TransactionResponse $response */
+				$response = $this->proxy->create_transaction( $products, $email, $phone, $label );
 				if ( $this->integration->get_debug_log() ) {
 					wc_get_logger()->notice( 'Automater.pl: ' . var_export( $response, true ) );
 				}
-				if ( $response['code'] === 200 ) {
-					if ( $automater_cart_id = $response['cart_id'] ) {
-						$order->update_meta_data( 'automater_cart_id', $automater_cart_id );
-						$order->save();
-						$result[] = sprintf( __( 'Created cart number: %s', 'automater-pl' ), $automater_cart_id );
-					}
+				if ( $response && $automater_cart_id = $response->getCartId() ) {
+					$order->update_meta_data( 'automater_cart_id', $automater_cart_id );
+					$order->save();
+					$result[] = sprintf( __( 'Created cart number: %s', 'automater-pl' ), $automater_cart_id );
 				}
-			} catch ( Exception $e ) {
-				if ( $this->integration->get_debug_log() ) {
-					wc_get_logger()->notice( 'Automater.pl: ' . $e->getMessage() );
-				}
-				$result[] = $e->getMessage();
+			} catch ( UnauthorizedException $exception ) {
+				$this->handle_exception( $result, 'Invalid API key' );
+			} catch ( TooManyRequestsException $e ) {
+				$this->handle_exception( $result, 'Too many requests to Automater: ' . $e->getMessage() );
+			} catch ( NotFoundException $e ) {
+				$this->handle_exception( $result, 'Not found - invalid params' );
+			} catch ( ApiException $e ) {
+				$this->handle_exception( $result, $e->getMessage() );
 			}
 		}
 	}
@@ -156,24 +168,45 @@ class OrderProcessor {
 			return;
 		}
 
-		$result = [];
+		$result   = [];
+		$result[] = __( 'Automater.pl codes:', 'automater-pl' );
+
+		$this->create_automater_payment( $order, $automater_cart_id, $result );
+		$this->add_order_note( $result, $order );
+		if ( $this->integration->get_debug_log() ) {
+			wc_get_logger()->notice( 'Automater.pl: ' . implode( ' | ', $result ) );
+		}
+	}
+
+	protected function create_automater_payment( WC_Order $order, $automater_cart_id, &$result ) {
+		$payment_id  = $order->get_id();
+		$amount      = $order->get_subtotal();
+		$description = $order->get_payment_method();
+
 		try {
-			$response = $this->proxy->create_payment( $automater_cart_id, $order->get_id(), $order->get_subtotal() );
+			/** @var PaymentResponse $response */
+			$response = $this->proxy->create_payment( $automater_cart_id, $payment_id, $amount, $description );
 			if ( $this->integration->get_debug_log() ) {
 				wc_get_logger()->notice( 'Automater.pl: ' . var_export( $response, true ) );
 			}
-			if ( $response['code'] === 200 ) {
+			if ( $response ) {
 				$result[] = sprintf( __( 'Automater.pl - paid successfully: %s', 'automater-pl' ), $automater_cart_id );
 			}
-		} catch ( Exception $e ) {
-			if ( $this->integration->get_debug_log() ) {
-				wc_get_logger()->notice( 'Automater.pl: ' . $e->getMessage() );
-			}
-			$result[] = $e->getMessage();
-			$this->add_order_note( $result, $order );
-
-			return;
+		} catch ( UnauthorizedException $exception ) {
+			$this->handle_exception( $result, 'Invalid API key' );
+		} catch ( TooManyRequestsException $e ) {
+			$this->handle_exception( $result, 'Too many requests to Automater: ' . $e->getMessage() );
+		} catch ( NotFoundException $e ) {
+			$this->handle_exception( $result, 'Not found - invalid params' );
+		} catch ( ApiException $e ) {
+			$this->handle_exception( $result, $e->getMessage() );
 		}
-		$this->add_order_note( $result, $order );
+	}
+
+	protected function handle_exception( array &$result, $exception_message ) {
+		if ( $this->integration->get_debug_log() ) {
+			wc_get_logger()->notice( 'Automater.pl: ' . $exception_message );
+		}
+		$result[] = 'Automater.pl: ' . $exception_message;
 	}
 }

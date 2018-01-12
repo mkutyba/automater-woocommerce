@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Automater.pl 0.1.2\n"
-"POT-Creation-Date: 2017-11-23 15:32+0100\n"
-"PO-Revision-Date: 2018-01-11 13:15+0100\n"
+"Project-Id-Version: Automater.pl 0.1.3\n"
+"POT-Creation-Date: 2018-01-11 16:01+0100\n"
+"PO-Revision-Date: 2018-01-11 16:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -140,41 +140,41 @@ msgstr "Produkt nie jest zarządzany przez automater: %s [%s]"
 msgid "Invalid quantity of product: %s [%s]"
 msgstr "Nieprawidłowa ilość produktu: %s [%s]"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:90
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:96
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:93
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:99
 #, php-format
 msgid "No codes for ID: %s"
 msgstr "Brak kodów dla ID: %s"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:101
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:104
 #, php-format
 msgid "Not enough codes for ID, sent less: %s"
 msgstr "Niewystarczająca liczba kodów dla ID, wysłano mniej: %s"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:118
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:123
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:121
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:126
 #, php-format
 msgid "Order from %s, id: #%s"
 msgstr "Zamówienie z %s, id: #%s"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:132
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:135
 #, php-format
 msgid "Created cart number: %s"
 msgstr "Utworzono koszyk numer: %s"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:166
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:169
 #, php-format
 msgid "Automater.pl - paid successfully: %s"
 msgstr "Automater.pl - zapłacono pomyślnie: %s"
 
 #: includes/KutybaIt/Automater/WC/Synchronizer.php:19
 #: includes/KutybaIt/Automater/WC/Synchronizer.php:33
-#: includes/KutybaIt/Automater/WC/Synchronizer.php:150
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:151
 msgid "Cheatin&#8217; uh?"
 msgstr "Oszukujesz?"
 
 #: includes/KutybaIt/Automater/WC/Synchronizer.php:23
-#: includes/KutybaIt/Automater/WC/Synchronizer.php:154
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:155
 msgid "Please provide API configuration first."
 msgstr "Najpierw podaj konfigurację interfejsu API."
 
@@ -182,7 +182,7 @@ msgstr "Najpierw podaj konfigurację interfejsu API."
 msgid "Sorry, you are not allowed to create terms in this taxonomy."
 msgstr "Niestety, nie możesz tworzyć wpisów w tej taksonomii."
 
-#: includes/KutybaIt/Automater/WC/Synchronizer.php:120
+#: includes/KutybaIt/Automater/WC/Synchronizer.php:121
 msgid "Every 5 Minutes"
 msgstr "Co 5 minut"
 

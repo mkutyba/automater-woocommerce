@@ -61,26 +61,27 @@ class Synchronizer {
 		$to_delete = $existing_products;
 
 		foreach ( $products as $product ) {
-			$product['id'] = sanitize_term_field( 'slug', $product['id'], 0, $taxonomy, 'db' );
+			/** @var \AutomaterSDK\Response\Entity\Product $product */
+			$product_id = sanitize_term_field( 'slug', $product->getId(), 0, $taxonomy, 'db' );
 
-			if ( isset( $existing_products[ $product['id'] ] ) ) {
-				unset( $to_delete[ $product['id'] ] );
+			if ( isset( $existing_products[ $product_id ] ) ) {
+				unset( $to_delete[ $product_id ] );
 				continue;
 			}
 
 			$params = [
 				'post_type' => 'product',
-				'slug'      => $product['id'],
+				'slug'      => $product_id,
 			];
 
 			if ( $this->integration->get_debug_log() ) {
-				wc_get_logger()->notice( 'Automater.pl: Importing product: ID ' . $product['id'] );
+				wc_get_logger()->notice( 'Automater.pl: Importing product: ID ' . $product_id );
 			}
-			$ret = wp_insert_term( $product['name'], $taxonomy, $params );
+			$ret = wp_insert_term( $product->getName(), $taxonomy, $params );
 			if ( $ret && ! is_wp_error( $ret ) ) {
 				$imported ++;
 			} else {
-				wc_get_logger()->error( 'Automater.pl: Product was not imported because of error: ID ' . $product['id'] );
+				wc_get_logger()->error( 'Automater.pl: Product was not imported because of error: ID ' . $product_id );
 			}
 		}
 

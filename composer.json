@@ -3,7 +3,8 @@
     "description": "WooCommerce integration with Automater.pl",
     "type": "wordpress-plugin",
     "require": {
-        "php-di/php-di": "^5.4"
+        "php-di/php-di": "^5.4",
+        "automater-pl/rest-php-sdk": "^0.1"
     },
     "license": "GPLv3",
     "authors": [
