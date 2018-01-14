@@ -53,8 +53,7 @@ class OrderProcessor {
 		$result   = [];
 		$result[] = __( 'Automater.pl codes:', 'automater-pl' );
 
-		$products = $this->validate_items( $items, $result );
-		$this->validate_products_stock( $products, $result );
+		$products = $this->transform_order_items( $items, $result );
 		$this->create_automater_transaction( $products, $order, $result );
 		$this->add_order_note( $result, $order );
 		if ( $this->integration->get_debug_log() ) {
@@ -62,7 +61,7 @@ class OrderProcessor {
 		}
 	}
 
-	protected function validate_items( array $items, array &$result ) {
+	protected function transform_order_items( array $items, array &$result ) {
 		$products = [];
 		/** @var WC_Order_Item_Product $item */
 		foreach ( $items as $item ) {
@@ -89,32 +88,6 @@ class OrderProcessor {
 		}
 
 		return $products;
-	}
-
-	protected function validate_products_stock( array &$products, array &$result ) {
-		foreach ( $products as $automater_product_id => $product ) {
-			try {
-				if ( ! $product['qty'] ) {
-					$result[] = sprintf( __( 'No codes for ID: %s', 'automater-pl' ), $automater_product_id );
-					unset( $products[ $automater_product_id ] );
-					continue;
-				}
-				$qty         = $product['qty'];
-				$codes_count = $this->proxy->get_count_for_product( $automater_product_id );
-				if ( ! $codes_count ) {
-					$result[] = sprintf( __( 'No codes for ID: %s', 'automater-pl' ), $automater_product_id );
-					unset( $products[ $automater_product_id ] );
-					continue;
-				}
-				if ( $codes_count < $qty ) {
-					$result[]                                 = sprintf( __( 'Not enough codes for ID, sent less: %s', 'automater-pl' ), $automater_product_id );
-					$products[ $automater_product_id ]['qty'] = $codes_count;
-				}
-			} catch ( Exception $e ) {
-				$result[] = $e->getMessage() . sprintf( ': %s', $automater_product_id );
-				unset( $products[ $automater_product_id ] );
-			}
-		}
 	}
 
 	protected function create_automater_transaction( array $products, WC_Order $order, array &$result ) {

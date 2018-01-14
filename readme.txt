@@ -4,13 +4,16 @@ Tags: integration, automation
 Requires at least: 4.8
 Tested up to: 4.9
 Requires PHP: 5.6
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 License: GPLv3
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WooCommerce integration with Automater.pl
 
 == Changelog ==
+
+= 0.1.4 - 2018-01-14 =
+* Don't check stocks in Automater - always send full transaction
 
 = 0.1.3 - 2018-01-13 =
 * Update Automater PHP SDK to current version

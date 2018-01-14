@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Automater.pl 0.1.3\n"
-"POT-Creation-Date: 2018-01-11 16:01+0100\n"
-"PO-Revision-Date: 2018-01-11 16:01+0100\n"
+"Project-Id-Version: Automater.pl 0.1.4\n"
+"POT-Creation-Date: 2018-01-14 21:24+0100\n"
+"PO-Revision-Date: 2018-01-14 21:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -88,11 +88,11 @@ msgstr "Sukces aktualizacji stanów magazynowych."
 msgid "Nothing to update."
 msgstr "Nic do aktualizacji."
 
-#: includes/KutybaIt/Automater/WC/Integration.php:160
+#: includes/KutybaIt/Automater/WC/Integration.php:159
 msgid "Automater Product"
 msgstr "Produkt Automater"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:192
+#: includes/KutybaIt/Automater/WC/Integration.php:191
 msgid ""
 "Looks like you made a mistake with the API Key field. Make sure it is 32 "
 "characters copied from Automater.pl settings"
@@ -100,7 +100,7 @@ msgstr ""
 "Wygląda na to, że popełniłeś błąd w polu API Key. Upewnij się, że skopiowano "
 "32 znaki z ustawień Automater.pl"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:201
+#: includes/KutybaIt/Automater/WC/Integration.php:200
 msgid ""
 "Looks like you made a mistake with the API Secret field. Make sure it is 32 "
 "characters copied from Automater.pl settings"
@@ -108,7 +108,7 @@ msgstr ""
 "Wygląda na to, że popełniłeś błąd w polu API Secret. Upewnij się, że "
 "skopiowano 32 znaki z ustawień Automater.pl"
 
-#: includes/KutybaIt/Automater/WC/Integration.php:229
+#: includes/KutybaIt/Automater/WC/Integration.php:228
 msgid ""
 "Automater.pl integration is almost ready. To get started, connect your "
 "account by providing API Keys."
@@ -116,7 +116,7 @@ msgstr ""
 "Integracja Automater.pl jest już prawie gotowa. Aby rozpocząć, połącz swoje "
 "konto, podając klucze API."
 
-#: includes/KutybaIt/Automater/WC/Integration.php:229
+#: includes/KutybaIt/Automater/WC/Integration.php:228
 msgid "Go to settings"
 msgstr "Przejdź do ustawień"
 
@@ -126,43 +126,33 @@ msgstr ""
 "Nie można zarejestrować integracji Automater.pl. Czy WooCommerce jest "
 "zainstalowany?"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:48
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:54
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:145
 msgid "Automater.pl codes:"
 msgstr "Kody Automater.pl:"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:66
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:71
 #, php-format
 msgid "Product not managed by automater: %s [%s]"
 msgstr "Produkt nie jest zarządzany przez automater: %s [%s]"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:71
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:76
 #, php-format
 msgid "Invalid quantity of product: %s [%s]"
 msgstr "Nieprawidłowa ilość produktu: %s [%s]"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:93
 #: includes/KutybaIt/Automater/WC/OrderProcessor.php:99
-#, php-format
-msgid "No codes for ID: %s"
-msgstr "Brak kodów dla ID: %s"
-
 #: includes/KutybaIt/Automater/WC/OrderProcessor.php:104
-#, php-format
-msgid "Not enough codes for ID, sent less: %s"
-msgstr "Niewystarczająca liczba kodów dla ID, wysłano mniej: %s"
-
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:121
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:126
 #, php-format
 msgid "Order from %s, id: #%s"
 msgstr "Zamówienie z %s, id: #%s"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:135
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:115
 #, php-format
 msgid "Created cart number: %s"
 msgstr "Utworzono koszyk numer: %s"
 
-#: includes/KutybaIt/Automater/WC/OrderProcessor.php:169
+#: includes/KutybaIt/Automater/WC/OrderProcessor.php:166
 #, php-format
 msgid "Automater.pl - paid successfully: %s"
 msgstr "Automater.pl - zapłacono pomyślnie: %s"
@@ -185,6 +175,3 @@ msgstr "Niestety, nie możesz tworzyć wpisów w tej taksonomii."
 #: includes/KutybaIt/Automater/WC/Synchronizer.php:121
 msgid "Every 5 Minutes"
 msgstr "Co 5 minut"
-
-#~ msgid "Unable to register Automater.pl integration."
-#~ msgstr "Nie można zarejestrować integracji Automater.pl."
